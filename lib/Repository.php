@@ -41,7 +41,11 @@ class Repository
 
         /** @var \SplFileInfo $file */
         foreach ($finder as $file) {
-            $articles[] = $this->formatter->formatHead($file);
+            $head = $this->formatter->formatHead($file);
+
+            if ($head->published) {
+                $articles[] = $head;
+            }
         }
 
         return $articles;

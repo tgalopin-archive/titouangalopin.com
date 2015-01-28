@@ -44,6 +44,7 @@ class Formatter
         $article->date = \DateTime::createFromFormat('U', $metadata['date']);
         $article->tags = $metadata['tags'];
         $article->comments = $metadata['comments'];
+        $article->published = $metadata['published'];
         $article->intro = $this->converter->convertToHtml(trim($metadata['intro']));
 
         return $article;

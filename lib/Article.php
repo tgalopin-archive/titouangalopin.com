@@ -33,6 +33,11 @@ class Article
     public $comments;
 
     /**
+     * @var boolean
+     */
+    public $published;
+
+    /**
      * @var string
      */
     public $intro;

@@ -111,7 +111,7 @@ $app->get('/blog/{slug}', function($slug) use ($app) {
 
     $article = $repository->findOne($slug);
 
-    if (! $article) {
+    if (! $article || ! $article instanceof Article || ! $article->published) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     }
 
