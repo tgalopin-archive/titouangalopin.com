@@ -6,6 +6,9 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
 $config = require __DIR__ . '/../parameters.php';
 
 $app = new Silex\Application();
@@ -46,6 +49,55 @@ $app['paginator_renderer'] = function() use ($app) {
 /*
  * Application
  */
+
+/**
+ * Error page
+ */
+$app->error(function (\Exception $exception, $code) use ($app) {
+
+    $errorMail = <<<EOT
+Error "%s %s" occured on page "%s" requested by %s.
+
+Request:
+    IP: %s
+    Method: %s
+    Request URI: %s
+
+Exception:
+    Name: %s
+    Message: %s
+    File: %s
+    Line: %s
+
+Trace:
+
+%s
+EOT;
+
+    /** @var Request $request */
+    $request = $app['request'];
+
+    $errorMail = sprintf(
+        $errorMail, $code, Response::$statusTexts[$code], $request->getRequestUri(), $request->getClientIp(),
+        $request->getClientIp(), $request->getMethod(), $request->getRequestUri(),
+        get_class($exception), $exception->getMessage(), $exception->getFile(), $exception->getLine(),
+        $exception->getTraceAsString()
+    );
+
+    $message = \Swift_Message::newInstance()
+        ->setSubject('[titouangalopin.com] Error ' . $code)
+        ->setFrom('contact@titouangalopin.com', 'titouangalopin.com')
+        ->setTo('galopintitouan@gmail.com')
+        ->setBody($errorMail, 'text/plain');
+
+    $app['mailer']->send($message);
+
+    return $app['twig']->render('error.html.twig', [
+        'code' => $code,
+        'message' => Response::$statusTexts[$code]
+    ]);
+
+});
 
 /**
  * Homepage

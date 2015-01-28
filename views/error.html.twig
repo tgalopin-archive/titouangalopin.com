@@ -1,0 +1,31 @@
+{% extends '_base.html.twig' %}
+
+{% block title %}Titouan Galopin - {{ code }} {{ message }}{% endblock %}
+{% block description %}Personnal blog about new technologies and algorthmic{% endblock %}
+{% block keywords %}titouan, galopin, blog, simhash, web, mobile, phonegap, cordova, symfony{% endblock %}
+
+{% block navigation %}
+    <p class="header-nav">
+        <a href="/">About</a>
+        <a href="/portfolio">Work</a>
+        <a href="/#contact">Contact</a>
+        <a href="/blog">Blog</a>
+    </p>
+{% endblock %}
+
+{% block content %}
+
+    <section id="error">
+        <h2>{{ code }} {{ message }}</h2>
+
+        <p>
+            {% if code == 404 %}
+                This isn't the page you are looking for. Do you want to <a href="/">go back on home</a>?
+            {% elseif code == 403 %}
+                You are not really allowed to access this. Do you want to <a href="/">go back on home</a>?
+            {% else %}
+                Something went really wrong, sorry! Do you want to <a href="/">go back on home</a>?
+            {% endif %}
+        </p>
+    </section>
+{% endblock %}
