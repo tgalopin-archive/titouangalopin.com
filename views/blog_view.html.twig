@@ -1,0 +1,83 @@
+{% extends '_base.html.twig' %}
+
+{% block title %}Titouan Galopin - {{ article.title }}{% endblock %}
+{% block description %}{{ article.intro|striptags }}{% endblock %}
+{% block keywords %}{{ article.tags|join(', ') }}{% endblock %}
+
+{% block navigation %}
+    <p class="header-nav">
+        <a href="/">About</a>
+        <a href="/portfolio">Work</a>
+        <a href="/#contact">Contact</a>
+        <a href="/blog">Blog</a>
+    </p>
+{% endblock %}
+
+{% block open_graph %}
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://www.titouangalopin.com/blog/articles/2014/05/simhash-or-the-way-to-compare-quickly-two-datasets" />
+    <meta property="og:title" content="{{ article.title }}" />
+    <meta property="og:site_name" content="Titouan Galopin" />
+    <meta property="og:description" content="{{ block('description') }}" />
+    <meta property="article:published_time" content="{{ article.date|date('Y-m-d') }}" />
+
+    {% for tag in article.tags %}
+        <meta property="article:tag" content="comparison" />
+    {% endfor %}
+{% endblock %}
+
+{% block head %}
+    <script type="text/javascript" src="/js/highlight/highlight.pack.js"></script>
+    <link rel="stylesheet" href="/js/highlight/styles/github.css" />
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <style> #MathJax_Message { display: none; } </style>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ["$","$"]]
+            },
+            extensions: ["jsMath2jax.js", "tex2jax.js"],
+            messageStyle: "none"
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <section id="blog">
+        <h2>
+            {{ article.title }}
+        </h2>
+
+        <h6>
+            Posted on {{ article.date|date('M d Y') }}
+        </h6>
+
+        <br />
+
+
+        {{ article.content|raw }}
+
+
+        <br />
+        <br />
+
+        <div id="disqus_thread"></div>
+
+        <script type="text/javascript">
+            var disqus_shortname = 'titouangalopin';
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </section>
+
+{% endblock %}

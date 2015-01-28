@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>{% block title %}Titouan Galopin{% endblock %}</title>
+
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta name="keywords" content="{% block keywords %}{% endblock %}" />
+
+    <!--[if lte IE 8]><script src="/css/ie/html5shiv.js"></script><![endif]-->
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.poptrox.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/init.js"></script>
+
+    <noscript>
+        <link rel="stylesheet" href="/css/skel.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/style-xlarge.css" />
+    </noscript>
+
+    <!--[if lte IE 8]><link rel="stylesheet" href="/css/ie/v8.css" /><![endif]-->
+
+    {% block open_graph %}
+        <meta property="og:title" content="Titouan Galopin" />
+        <meta property="og:type" content="blog" />
+        <meta property="og:url" content="http://www.titouangalopin.com" />
+        <meta property="og:description" content="{{ block('description') }}" />
+    {% endblock %}
+
+    {% block head %}{% endblock %}
+</head>
+<body id="top">
+
+    <!-- Header -->
+    <header id="header">
+        <a href="/" class="image avatar" title="Back to home">
+            <img src="/images/tgalopin.jpg" alt="Titouan Galopin" />
+        </a>
+
+        <h1>
+            <strong>Titouan Galopin</strong>
+            <br />
+            Web and Mobile developer
+        </h1>
+
+        {% block navigation %}{% endblock %}
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <ul class="icons">
+            <li>
+                <a href="https://github.com/tgalopin" class="icon fa-twitter-square" title="Twitter">
+                    <span class="label">Twitter</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://fr.linkedin.com/in/titouangalopin/" class="icon fa-github-square" title="Github">
+                    <span class="label">Github</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/titouangalopin" class="icon fa-linkedin-square" title="LinkedIn">
+                    <span class="label">LinkedIn</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.facebook.com/titouan.galopin" class="icon fa-facebook-square" title="Facebook">
+                    <span class="label">Facebook</span>
+                </a>
+            </li>
+            <li>
+                <a href="mailto:galopintitouan@gmail.com" class="icon fa-envelope-square" title="Email">
+                    <span class="label">Email</span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="copyright">
+            <li>&copy; Titouan Galopin</li><li>Design by <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </footer>
+
+</body>
+</html>

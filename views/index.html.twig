@@ -1,0 +1,183 @@
+{% extends '_base.html.twig' %}
+
+{% block title %}Titouan Galopin - Web and Mobile developer{% endblock %}
+{% block description %}Personnal blog about new technologies and algorthmic{% endblock %}
+{% block keywords %}titouan, galopin, blog, simhash, web, mobile, phonegap, cordova, symfony{% endblock %}
+
+{% block navigation %}
+    <p class="header-nav">
+        <a href="/">About</a>
+        <a href="/portfolio">Work</a>
+        <a href="#contact">Contact</a>
+        <a href="/blog">Blog</a>
+    </p>
+{% endblock %}
+
+{% block content %}
+
+    {% if messageSent %}
+        <section id="message">
+            <p class="alert-success">
+                Your messge has been sent. I'll answer you as soon as possible.
+            </p>
+        </section>
+    {% endif %}
+
+    <section id="ajout">
+        <header class="major">
+            <h2>
+                Hello
+            </h2>
+        </header>
+
+        <p>
+            I'm a Junior <strong>Web</strong> and <strong>Mobile</strong> developer based in France.
+        </p>
+
+        <p>
+            I build websites (<strong>PHP</strong> and <strong>Javascript</strong>)
+            and mobile applications (<strong>Phonegap</strong>).<br />
+            I like to use <strong>Symfony</strong>, <strong>NodeJS</strong>, <strong>AngularJS</strong>
+            and <strong>Ionic</strong>.
+        </p>
+
+        <ul class="actions">
+            <li>
+                <a href="/portfolio" class="button">
+                    Full Resume
+                </a>
+            </li>
+            <li>
+                <a href="/doc/cv.pdf" class="button" target="_blank">
+                    Short Resume (PDF)
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <section id="work">
+        <h2>Recent Work</h2>
+
+        <div class="row">
+            <article class="6u 12u$(xsmall) work-item">
+                <a href="http://coburo.com" class="image fit thumb" target="_blank">
+                    <img src="/images/coburo.jpg" alt="Coburo" />
+                </a>
+                <h3>
+                    Coburo - Web Architect
+                </h3>
+                <p>
+                    Community platform to connect coworking peoples and teams<br />
+                    <a href="http://coburo.com">
+                        Learn more&nbsp;&raquo;
+                    </a>
+                </p>
+            </article>
+
+            <article class="6u$ 12u$(xsmall) work-item">
+                <a href="http://mana-drain.net" class="image fit thumb" target="_blank">
+                    <img src="/images/manadrain.jpg" alt="" />
+                </a>
+                <h3>
+                    Mana-Drain - Web Architect
+                </h3>
+                <p>
+                    International gaming social network about Magic The Gathering<br />
+                    <a href="http://en.mana-drain.net/what-is-mana-drain.php#english">
+                        Learn more&nbsp;&raquo;
+                    </a>
+                </p>
+            </article>
+
+            <article class="6u 12u$(xsmall) work-item">
+                <a href="https://etu.utt.fr" class="image fit thumb" target="_blank">
+                    <img src="/images/etuutt.jpg" alt="" />
+                </a>
+                <h3>
+                    EtuUTT - Project Leader
+                </h3>
+                <p>
+                    Student website of the the University of Technology of Troyes engineering school<br />
+                    <a href="https://www.youtube.com/watch?v=ng4rf6lb-nI">
+                        Learn more (presentation video) &nbsp;&raquo;
+                    </a>
+                </p>
+            </article>
+
+            <article class="6u 12u$(xsmall) work-item">
+                <a href="https://play.google.com/store/apps/details?id=com.ademis.captair_bretagne" class="image fit thumb" target="_blank">
+                    <img src="/images/captair.jpg" alt="" />
+                </a>
+                <h3>
+                    Captair - Mobile Developer
+                </h3>
+                <p>
+                    Pollen monitoring application for a government organization<br />
+                    <a href="https://play.google.com/store/apps/details?id=com.ademis.captair_bretagne">
+                        Learn more&nbsp;&raquo;
+                    </a>
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+
+        <div class="row">
+            <div class="8u 12u$(small)">
+                <form method="post" action="">
+                    <div class="row uniform 50%">
+                        <div class="6u 12u$(xsmall)"><input type="text" name="name" id="name" placeholder="Name" /></div>
+                        <div class="6u$ 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="Email" /></div>
+                        <div class="12u$"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
+                    </div>
+
+                    <br />
+
+                    <ul class="actions">
+                        <li><input type="submit" value="Send Message" /></li>
+                    </ul>
+                </form>
+            </div>
+            <div class="4u$ 12u$(small)">
+                <ul class="labeled-icons">
+                    <li>
+                        <h3 class="icon fa-home"><span class="label">Address</span></h3>
+                        Le bourdonnay<br />
+                        35420 St Georges de Rlt<br />
+                        France
+                    </li>
+                    <li>
+                        <h3 class="icon fa-mobile"><span class="label">Phone</span></h3>
+                        <em>Available on the <a href="/doc/cv.pdf">PDF CV</a></em>
+                    </li>
+                    <li>
+                        <h3 class="icon fa-envelope-o"><span class="label">Email</span></h3>
+                        <a href="#">galopintitouan@gmail.com</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('a[href*=#]:not([href=#])').click(function() {
+                if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                    if (target.length) {
+                        $('html,body').animate({
+                            scrollTop: target.offset().top
+                        }, 300);
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,10 @@
+
+composer.phar
+vendor/
+
+*.iml
+.idea/
+*.ipr
+*.iws
+
+parameters.php

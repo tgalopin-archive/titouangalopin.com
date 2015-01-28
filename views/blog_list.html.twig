@@ -1,0 +1,51 @@
+{% extends '_base.html.twig' %}
+
+{% block title %}Titouan Galopin - Blog posts{% endblock %}
+{% block description %}Personnal blog about new technologies and algorthmic{% endblock %}
+{% block keywords %}titouan, galopin, blog, simhash, web, mobile, phonegap, cordova, symfony{% endblock %}
+
+{% block navigation %}
+    <p class="header-nav">
+        <a href="/">About</a>
+        <a href="/portfolio">Work</a>
+        <a href="/#contact">Contact</a>
+        <a href="/blog">Blog</a>
+    </p>
+{% endblock %}
+
+{% block content %}
+
+    <section id="blog">
+        <h2>Blog</h2>
+
+        {% for article in articles %}
+            <section>
+                <hr />
+
+                <header>
+                    <h4>
+                        <a href="/blog/{{ article.slug }}">
+                            {{ article.title }}
+                        </a>
+                    </h4>
+
+                    <p>
+                        Posted on {{ article.date|date('M d Y') }}
+                    </p>
+                </header>
+
+                {{ article.intro|raw }}
+
+                <ul class="actions">
+                    <li>
+                        <a href="/blog/{{ article.slug }}" class="button small">
+                            Read more&nbsp;&raquo;
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        {% endfor %}
+
+    </section>
+
+{% endblock %}
