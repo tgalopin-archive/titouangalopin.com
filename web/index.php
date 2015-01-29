@@ -142,19 +142,66 @@ $app->get('/blog', function() use ($app) {
     /** @var Repository $repository */
     $repository = $app['repository'];
 
-    // $pagination = $app['paginator']->paginate($repository->findList(), 1, 20);
-    // $pagination->renderer = $app['paginator_renderer'];
-
     return $app['twig']->render('blog_list.html.twig', [
-        'articles' => $repository->findList() // $pagination->getItems(),
-        //'pagination' => $pagination
+        'articles' => $repository->findList()
     ]);
 
 });
 
 
 /**
- * Blog - List
+ * Blog - RSS
+ */
+$app->get('/flux.rss', function() use ($app) {
+
+    /** @var Repository $repository */
+    $repository = $app['repository'];
+
+    $feed = new \Suin\RSSWriter\Feed();
+
+    $channel = new \Suin\RSSWriter\Channel();
+    $channel
+        ->title('Titouan Galopin')
+        ->description('A Web and Mobile developer blog')
+        ->url('http://www.titouangalopin.com')
+        ->language('en')
+        ->copyright('CC BY-NC-SA')
+        ->appendTo($feed);
+
+    $first = true;
+
+    foreach ($repository->findList() as $article) {
+        if ($first) {
+            $channel->lastBuildDate((int) $article->date->format('U'));
+            $first = false;
+        }
+
+        $item = new \Suin\RSSWriter\Item();
+
+        $item
+            ->title($article->title)
+            ->description($app['converter']->convertToHtml($article->intro))
+            ->url('http://www.titouangalopin.com/blog/' . $article->slug)
+            ->guid('http://www.titouangalopin.com/blog/' . $article->slug, true)
+            ->pubDate((int) $article->date->format('U'));
+
+        foreach ($article->tags as $tag) {
+            $item->category($tag);
+        }
+
+        $item->appendTo($channel);
+    }
+
+    $response = new Response($feed->render(), 200, [ 'Content-type' => 'application/rss+xml' ]);
+    $response->setEtag(md5($feed->render()));
+
+    return $response;
+
+});
+
+
+/**
+ * Blog - View
  */
 $app->get('/blog/{slug}', function($slug) use ($app) {
 
@@ -172,7 +219,6 @@ $app->get('/blog/{slug}', function($slug) use ($app) {
     ]);
 
 });
-
 
 
 
