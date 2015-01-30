@@ -222,7 +222,7 @@ $app->get('/blog/{slug}', function($slug) use ($app) {
 
 
 /**
- * Blog - SEO redirect
+ * SEO redirect
  */
 $app->get('/blog/', function() use ($app) {
     return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
@@ -230,6 +230,10 @@ $app->get('/blog/', function() use ($app) {
 
 $app->get('/blog.html', function() use ($app) {
     return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
+});
+
+$app->get('/cv.html', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/portfolio', 301);
 });
 
 
