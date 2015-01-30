@@ -221,6 +221,18 @@ $app->get('/blog/{slug}', function($slug) use ($app) {
 });
 
 
+/**
+ * Blog - SEO redirect
+ */
+$app->get('/blog/', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog');
+});
+
+$app->get('/blog.html', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog');
+});
+
+
 
 /*
  * Terminate
