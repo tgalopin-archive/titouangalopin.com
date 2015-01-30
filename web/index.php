@@ -225,11 +225,11 @@ $app->get('/blog/{slug}', function($slug) use ($app) {
  * Blog - SEO redirect
  */
 $app->get('/blog/', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog');
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
 });
 
 $app->get('/blog.html', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog');
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
 });
 
 
