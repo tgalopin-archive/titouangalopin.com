@@ -135,6 +135,14 @@ $app->get('/portfolio', function() use ($app) {
 
 
 /**
+ * Legalities
+ */
+$app->get('/legalities', function() use ($app) {
+    return $app['twig']->render('legalities.html.twig');
+});
+
+
+/**
  * Blog - List
  */
 $app->get('/blog', function() use ($app) {
@@ -228,12 +236,36 @@ $app->get('/blog/', function() use ($app) {
     return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
 });
 
+$app->get('/blog/blog', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
+});
+
+$app->get('/blog/search', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
+});
+
 $app->get('/blog.html', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
+});
+
+$app->get('/blog/user/1', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/', 301);
+});
+
+$app->get('/blog/blog/tagged/{tag}', function() use ($app) {
     return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
 });
 
 $app->get('/cv.html', function() use ($app) {
     return new \Symfony\Component\HttpFoundation\RedirectResponse('/portfolio', 301);
+});
+
+$app->get('/about', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/', 301);
+});
+
+$app->get('/legal-notice', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/legalities', 301);
 });
 
 
