@@ -209,27 +209,6 @@ $app->get('/flux.rss', function() use ($app) {
 
 
 /**
- * Blog - View
- */
-$app->get('/blog/{slug}', function($slug) use ($app) {
-
-    /** @var Repository $repository */
-    $repository = $app['repository'];
-
-    $article = $repository->findOne($slug);
-
-    if (! $article || ! $article instanceof Article || ! $article->published) {
-        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
-    }
-
-    return $app['twig']->render('blog_view.html.twig', [
-        'article' => $article
-    ]);
-
-});
-
-
-/**
  * SEO redirect
  */
 $app->get('/blog/', function() use ($app) {
@@ -266,6 +245,27 @@ $app->get('/about', function() use ($app) {
 
 $app->get('/legal-notice', function() use ($app) {
     return new \Symfony\Component\HttpFoundation\RedirectResponse('/legalities', 301);
+});
+
+
+/**
+ * Blog - View
+ */
+$app->get('/blog/{slug}', function($slug) use ($app) {
+
+    /** @var Repository $repository */
+    $repository = $app['repository'];
+
+    $article = $repository->findOne($slug);
+
+    if (! $article || ! $article instanceof Article || ! $article->published) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    }
+
+    return $app['twig']->render('blog_view.html.twig', [
+        'article' => $article
+    ]);
+
 });
 
 
