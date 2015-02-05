@@ -42,5 +42,5 @@ events using custom `AuthenticationSuccessHandler` and `LogoutSuccessHandler`.
 
 ### How can I log in a Drupal user from Symfony?
 
-That's cas the most difficult part. In fact, even now I don't uderstand all the part of it
+That's the most difficult part. In fact, even now I don't uderstand all the part of it
 as I used mysterious piece of code from Drupal to get the things to work.

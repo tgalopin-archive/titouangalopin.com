@@ -46,9 +46,56 @@ $app['paginator_renderer'] = function() use ($app) {
 };
 
 
-/*
- * Application
+/**
+ * SEO redirect
  */
+$app->get('/blog/', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
+});
+
+$app->get('/blog/blog', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
+});
+
+$app->get('/blog/search', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
+});
+
+$app->get('/blog.html', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
+});
+
+$app->get('/blog/user/1', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/', 301);
+});
+
+$app->get('/blog/blog/tagged/{tag}', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
+});
+
+$app->get('/blog/articles/2014/05/simhash', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog/2014-05-29-simhash', 301);
+});
+
+$app->get('/cv.html', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/portfolio', 301);
+});
+
+$app->get('/index.html', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/', 301);
+});
+
+$app->get('/about', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/', 301);
+});
+
+$app->get('/legal-notice', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/legalities', 301);
+});
+
+$app->get('/blog/rss', function() use ($app) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/flux.rss', 301);
+});
 
 /**
  * Error page
@@ -98,6 +145,11 @@ EOT;
     ]);
 
 });
+
+
+/*
+ * Application
+ */
 
 /**
  * Homepage
@@ -205,46 +257,6 @@ $app->get('/flux.rss', function() use ($app) {
 
     return $response;
 
-});
-
-
-/**
- * SEO redirect
- */
-$app->get('/blog/', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
-});
-
-$app->get('/blog/blog', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
-});
-
-$app->get('/blog/search', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
-});
-
-$app->get('/blog.html', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
-});
-
-$app->get('/blog/user/1', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/', 301);
-});
-
-$app->get('/blog/blog/tagged/{tag}', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/blog', 301);
-});
-
-$app->get('/cv.html', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/portfolio', 301);
-});
-
-$app->get('/about', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/', 301);
-});
-
-$app->get('/legal-notice', function() use ($app) {
-    return new \Symfony\Component\HttpFoundation\RedirectResponse('/legalities', 301);
 });
 
 
