@@ -102,43 +102,6 @@ $app->get('/blog/rss', function() use ($app) {
  */
 $app->error(function (\Exception $exception, $code) use ($app) {
 
-    $errorMail = <<<EOT
-Error "%s %s" occured on page "%s" requested by %s.
-
-Request:
-    IP: %s
-    Method: %s
-    Request URI: %s
-
-Exception:
-    Name: %s
-    Message: %s
-    File: %s
-    Line: %s
-
-Trace:
-
-%s
-EOT;
-
-    /** @var Request $request */
-    $request = $app['request'];
-
-    $errorMail = sprintf(
-        $errorMail, $code, Response::$statusTexts[$code], $request->getRequestUri(), $request->getClientIp(),
-        $request->getClientIp(), $request->getMethod(), $request->getRequestUri(),
-        get_class($exception), $exception->getMessage(), $exception->getFile(), $exception->getLine(),
-        $exception->getTraceAsString()
-    );
-
-    $message = \Swift_Message::newInstance()
-        ->setSubject('[titouangalopin.com] Error ' . $code)
-        ->setFrom('contact@titouangalopin.com', 'titouangalopin.com')
-        ->setTo('galopintitouan@gmail.com')
-        ->setBody($errorMail, 'text/plain');
-
-    $app['mailer']->send($message);
-
     return $app['twig']->render('error.html.twig', [
         'code' => $code,
         'message' => Response::$statusTexts[$code]
@@ -159,15 +122,32 @@ $app->match('/', function(\Symfony\Component\HttpFoundation\Request $request) us
     $messageSent = false;
 
     if ($request->getMethod() == 'POST') {
-        $message = \Swift_Message::newInstance()
-            ->setSubject('[titouangalopin.com] Contact form : Message from ' . $request->get('name'))
-            ->setFrom($request->get('email'), $request->get('name'))
-            ->setTo('galopintitouan@gmail.com')
-            ->setBody($request->get('message'));
+        $context  = stream_context_create([ 'http' => [
+            'method'  => 'POST',
+            'header'  => 'Content-type: application/x-www-form-urlencoded',
+            'content' => http_build_query([
+                'secret' => '6Lf10gQTAAAAAN3rfblKWD81WOjQn_2qAiYi0L21',
+                'response' => $request->get('g-recaptcha-response'),
+                'remoteip' => $request->getClientIp(),
+            ])
+        ]]);
 
-        $app['mailer']->send($message);
+        $result = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
+        $status = json_decode($result, true);
 
-        $messageSent = true;
+        $success = isset($status['success']) && $status['success'] === true;
+
+        if ($success) {
+            $message = \Swift_Message::newInstance()
+                ->setSubject('[titouangalopin.com] Contact form : Message from ' . $request->get('name'))
+                ->setFrom($request->get('email'), $request->get('name'))
+                ->setTo('galopintitouan@gmail.com')
+                ->setBody($request->get('message'));
+
+            $app['mailer']->send($message);
+
+            $messageSent = true;
+        }
     }
 
     return $app['twig']->render('index.html.twig', [

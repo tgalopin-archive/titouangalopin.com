@@ -4,6 +4,10 @@
 {% block description %}My projects, my CV and my blog about new technologies{% endblock %}
 {% block keywords %}titouan, galopin, blog, simhash, web, mobile, phonegap, cordova, symfony{% endblock %}
 
+{% block head %}
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+{% endblock %}
+
 {% block navigation %}
     <p class="header-nav">
         <a href="/">About</a>
@@ -133,6 +137,8 @@
                         <div class="6u$ 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="Email" /></div>
                         <div class="12u$"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
                     </div>
+
+                    <div class="g-recaptcha" data-sitekey="6Lf10gQTAAAAAOD7p4x4C-RAeA_hW7GMghffjSK5"></div>
 
                     <br />
 
