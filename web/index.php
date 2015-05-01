@@ -7,7 +7,6 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 
 $config = require __DIR__ . '/../parameters.php';
 

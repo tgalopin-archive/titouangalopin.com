@@ -1,0 +1,14 @@
+<?php
+
+return [
+
+    'mailer' => [
+        'host' => 'smtp.example.com',
+        'port' => '25',
+        'username' => '<username>',
+        'password' => '<password>',
+        'encryption' => null,
+        'auth_mode' => null
+    ]
+
+];
